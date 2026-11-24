@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import {randomBytes,randomUUID} from 'node:crypto';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+const root=process.env.TEST_URL??'http://127.0.0.1:3000';let cookie='';const results=[];
+async function request(path,method='GET',body,auth=false,headers={}){const r=await fetch(root+'/api/'+path,{method,headers:{...(body&&!(body instanceof FormData)?{'Content-Type':'application/json'}:{}),...(auth?{Cookie:cookie}:{}),...headers},body:body instanceof FormData?body:body?JSON.stringify(body):undefined});const data=r.headers.get('content-type')?.includes('application/json')?await r.json():await r.arrayBuffer();return {status:r.status,data,headers:r.headers};}
+function proof(name){results.push({name,passed:true});console.log('PASS '+name);}
+const denied=await request('admin/orders');assert.equal(denied.status,401);proof('owner data requires authentication');
+const login=await request('admin/local-demo','POST');assert.equal(login.status,200);cookie=login.headers.get('set-cookie').split(';')[0];assert.ok(login.headers.get('set-cookie').includes('HttpOnly'));proof('owner session has HttpOnly cookie');
+const config=(await request('config')).data;
+const draft=randomBytes(32).toString('hex'),photoId=randomUUID();const bytes=await readFile(new URL('../public/icon-192.png',import.meta.url));
+function imageForm(){const f=new FormData();f.append('draft',draft);f.append('id',photoId);f.append('file',new Blob([bytes],{type:'image/png'}),'test-furniture.png');return f;}
+const upload=await request('uploads','POST',imageForm());assert.equal(upload.status,201);const repeatPhoto=await request('uploads','POST',imageForm());assert.equal(repeatPhoto.data.id,upload.data.id);proof('photo retry returns the same stored photo');
+assert.equal((await request('admin/photos/'+photoId)).status,401);assert.equal((await request('admin/photos/'+photoId,'GET',undefined,true)).status,200);proof('photos are private and visible to the owner');
+const badForm=new FormData();badForm.append('id',randomUUID());badForm.append('draft',draft);badForm.append('file',new Blob(['not-an-image'],{type:'image/png'}),'fake.png');assert.equal((await request('uploads','POST',badForm)).status,400);proof('file contents are validated rather than trusting extensions');
+const idem=randomUUID();const item={id:randomUUID(),category:'sofa',variant:'three',quantity:1,dirt:false,bothSides:false,description:''};
+const input={idem,draft,items:[item,{...item,id:randomUUID(),category:'other',variant:'',description:'Тестовое изголовье'}],name:'Тест API (вымышленный)',phone:'+70000000001',address:'Тестовая улица, дом 0 (демо)',day:'2099-01-01',comment:'Автоматическая проверка, не реальная заявка',outside:true,photos:[photoId],consent:true};
+const [a,b]=await Promise.all([request('orders','POST',input),request('orders','POST',input)]);assert.equal(a.status,201);assert.equal(b.status,201);assert.equal(a.data.order.id,b.data.order.id);assert.equal(a.data.token,b.data.token);proof('simultaneous retries create exactly one order');
+assert.equal(a.data.order.estimate.pending,true);assert.equal(a.data.order.estimate.total,2900);proof('mixed price excludes unknown items and adds travel above minimum');
+const receipt=await request('orders/'+a.data.token);assert.equal(receipt.status,200);assert.equal(receipt.data.request,undefined);assert.equal(receipt.data.ownerNote,undefined);assert.equal((await request('orders/'+a.data.order.number)).status,404);proof('private receipt does not expose owner notes or work by order number');
+const changed={...config,rates:{...config.rates,'sofa.three':9999}};assert.equal((await request('admin/config','PUT',changed,true)).status,200);const ownerOrders=(await request('admin/orders','GET',undefined,true)).data;const stored=ownerOrders.find(o=>o.id===a.data.order.id);assert.equal(stored.estimate.total,2900);proof('saved order keeps tariff snapshot after price changes');
+const patch={status:'scheduled',agreedPrice:3500,agreedDay:'16 октября, 12:00–14:00',ownerNote:'Тестовая приватная заметка'};
+assert.equal((await request('admin/orders/'+stored.id,'PATCH',patch,true)).status,200);const agreed=(await request('orders/'+a.data.token)).data;assert.equal(agreed.agreedPrice,3500);assert.equal(agreed.status,'scheduled');assert.equal(agreed.ownerNote,undefined);proof('owner changes appear at the same private receipt URL');
+assert.equal((await request('admin/config','PUT',config,true,{'Origin':'https://foreign.example'})).status,403);proof('cross-origin mutations are rejected');
+await request('admin/config','PUT',config,true);
+const del=await request('uploads/'+photoId,'DELETE',undefined,false,{'x-draft-token':draft});assert.equal(del.status,409);proof('submitted photos cannot be removed by draft token');
+await request('admin/orders/'+stored.id,'DELETE',undefined,true);assert.equal((await request('orders/'+a.data.token)).status,404);assert.equal((await request('admin/photos/'+photoId,'GET',undefined,true)).status,404);proof('owner deletion removes receipt and photographs');
+await request('admin/config','PUT',{...config,game:'bonus'},true);
+const bonusInput={...input,idem:randomUUID(),items:[item],photos:[]};
+const bonusOrder=(await request('orders','POST',bonusInput)).data;
+assert.equal((await request('orders/'+bonusOrder.token+'/game','POST',{progress:10})).status,400);
+const firstCoupon=(await request('orders/'+bonusOrder.token+'/game','POST',{progress:98})).data.coupon;
+const repeatedCoupon=(await request('orders/'+bonusOrder.token+'/game','POST',{progress:100})).data.coupon;
+assert.deepEqual(firstCoupon,repeatedCoupon);proof('completed game issues one stable next-order coupon');
+await request('admin/orders/'+bonusOrder.order.id,'DELETE',undefined,true);
+await request('admin/config','PUT',{...config,game:'off'},true);
+const offOrder=(await request('orders','POST',{...bonusInput,idem:randomUUID()})).data;
+assert.equal((await request('orders/'+offOrder.token+'/game','POST',{progress:100})).status,403);proof('owner can disable game rewards entirely');
+await request('admin/orders/'+offOrder.order.id,'DELETE',undefined,true);
+await request('admin/config','PUT',config,true);
+await request('admin/logout','POST',undefined,true);assert.equal((await request('admin/orders','GET',undefined,true)).status,401);proof('logout invalidates the server session');
+await mkdir(new URL('../proof/',import.meta.url),{recursive:true});await writeFile(new URL('../proof/integration.json',import.meta.url),JSON.stringify({checkedAt:new Date().toISOString(),results},null,2));

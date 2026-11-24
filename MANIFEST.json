@@ -1,0 +1,586 @@
+{
+  "package": "MYAGKO_CLEANING_TEMPLATE_SANITIZED_PATCHED",
+  "app": {
+    "name": "myagko-cleaning",
+    "version": "0.1.0",
+    "node": "24.x",
+    "next": "16.4.5"
+  },
+  "generatedAt": "2026-11-08T01:41:54.803Z",
+  "install": [
+    "npm ci",
+    "cp .env.example .env.local",
+    "npm run dev"
+  ],
+  "excluded": [
+    "node_modules/",
+    ".next/",
+    ".vercel/",
+    ".env* (except .env.example)",
+    "data/ (SQLite, WAL/SHM, access files, production env dump)",
+    "proof/ (screenshots, logs, deployment reports)",
+    ".agents/, skills-lock.json",
+    "tsconfig.tsbuildinfo",
+    "vercel.json, .vercelignore",
+    "scripts/configure-vercel.mjs, scripts/migrate-production.mjs, scripts/verify-deployment.mjs",
+    "original README.md (replaced: contained deployment URL and team name)",
+    "everything outside web/: design/, demo/, backups/, research/, tools/, meme-*, root notes"
+  ],
+  "sanitization": [
+    "PNG tEXt/eXIf metadata (Blender render info incl. source file path) removed from public/posters/*.png and public/icons/sofa-figma.png; decoded pixels verified identical"
+  ],
+  "totals": {
+    "files": 83,
+    "bytes": 14952178
+  },
+  "categories": {
+    "config": {
+      "files": 8,
+      "bytes": 160052
+    },
+    "documentation": {
+      "files": 6,
+      "bytes": 23943
+    },
+    "license": {
+      "files": 3,
+      "bytes": 9939
+    },
+    "public-asset": {
+      "files": 18,
+      "bytes": 700841
+    },
+    "3d-model": {
+      "files": 6,
+      "bytes": 10556224
+    },
+    "poster-image": {
+      "files": 8,
+      "bytes": 3004551
+    },
+    "script": {
+      "files": 3,
+      "bytes": 4858
+    },
+    "source": {
+      "files": 27,
+      "bytes": 152127
+    },
+    "font": {
+      "files": 2,
+      "bytes": 329732
+    },
+    "test": {
+      "files": 2,
+      "bytes": 9911
+    }
+  },
+  "models": [
+    "public/models/armchair-character.glb",
+    "public/models/chair-character.glb",
+    "public/models/mattress-character.glb",
+    "public/models/sofa-character.glb",
+    "public/models/sofa-sleepy.glb",
+    "public/models/sofa-wink.glb"
+  ],
+  "files": [
+    {
+      "path": ".env.example",
+      "bytes": 993,
+      "sha256": "ad00e4121e5df91fb8d84a00561e0e20592fadac97eaa2b192b23dc15dfaea5c",
+      "category": "config"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 86,
+      "sha256": "a4ca098a043cd094d437be921496d9fea57aebe5520be897aa5b5aee39d30f89",
+      "category": "config"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 679,
+      "sha256": "063098f6cb31bb44c6f8fbea25b3876de7ee1e5f7d00a50dbab506f6415eb7f0",
+      "category": "documentation"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7832,
+      "sha256": "90d8b937cadae01ec35c1fd70167b996c2c26b5046ea66fb769620b8c94db345",
+      "category": "documentation"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 1919,
+      "sha256": "21ef315dabee623ba91302d0e79e766fce364a3030f3ce1229dacf8408fa1691",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/ENVIRONMENT.md",
+      "bytes": 3047,
+      "sha256": "0db049df1ad2f0826bd3e4ba1cdcb8d2a8fef1cf6c01924c99940122e5acbe2e",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/FEATURES.md",
+      "bytes": 5701,
+      "sha256": "c9bd6ac707138566a11ff2e8708d7c681565df8e99046cffcf6b2ca3dda39b8d",
+      "category": "documentation"
+    },
+    {
+      "path": "docs/STRUCTURE.md",
+      "bytes": 4765,
+      "sha256": "049455d3bdfa5cee647a16fad277763d82eb5b65cf6414d8aa7fc86cd34fa236",
+      "category": "documentation"
+    },
+    {
+      "path": "licenses/Onest-OFL.txt",
+      "bytes": 4384,
+      "sha256": "071195d8806e226faeee60259c28ca67b458227af5195a73f5cfcab06e3003bc",
+      "category": "license"
+    },
+    {
+      "path": "licenses/SpaceGrotesk-OFL.txt",
+      "bytes": 4495,
+      "sha256": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72",
+      "category": "license"
+    },
+    {
+      "path": "licenses/liquid-glass-react-MIT.txt",
+      "bytes": 1060,
+      "sha256": "3beea6e227a2549d48b616818e01ce303482cb0d598182add5d629b339bdb7cc",
+      "category": "license"
+    },
+    {
+      "path": "next-env.d.ts",
+      "bytes": 295,
+      "sha256": "1b59d4c6b83807db275d43f3cf2cc8e9323f465fab764eea091cc5becd5bad37",
+      "category": "config"
+    },
+    {
+      "path": "next.config.ts",
+      "bytes": 525,
+      "sha256": "092a4a6b2ff22e4a3639246dacf3347aeb5e6947e16930584194ae819a1ba7b6",
+      "category": "config"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 155624,
+      "sha256": "e0d97729fa0d7360eb54471b60b83b3a32b9dc55ad303af0d7ed11e1f656e556",
+      "category": "config"
+    },
+    {
+      "path": "package.json",
+      "bytes": 916,
+      "sha256": "c8333227aa40e8a99fa588f00cbf7d1a2f6ba42d497b2cc1ece17e1ddbdd92fc",
+      "category": "config"
+    },
+    {
+      "path": "postgres-schema.sql",
+      "bytes": 910,
+      "sha256": "ac5eeeb11b8c3df5eb7c8b57572d88eab9d461ba11d5dd07e7de22752394b7c4",
+      "category": "config"
+    },
+    {
+      "path": "public/icon-192.png",
+      "bytes": 3763,
+      "sha256": "b29915962a9c338fcc4790ff1d2cca2f5ca13afbdd478d2957d55a9677a148f2",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icon-512.png",
+      "bytes": 13959,
+      "sha256": "2c6cd882400ea4791a14edd4881fec550bbece742f6a095c9548f212a6600534",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icon.svg",
+      "bytes": 287,
+      "sha256": "7d18f995a558bea1c8e5933b4fa163a7ad96140ea655e0f7371a88d41d9128cc",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/armchair.svg",
+      "bytes": 1468,
+      "sha256": "096f104ccd706607c71715517a2668e252d2c8f31ee3c8c048f71e319fb68952",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/arrow.svg",
+      "bytes": 624,
+      "sha256": "38bc42ff9828e345d424962a2a29fd4b4ee95b7f7bb64b849d391d41eee3f9f2",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/back.svg",
+      "bytes": 277,
+      "sha256": "d0f5b29fc7e4f03103849847ffb8c4e2ba738198514a76a120cc5edf64292cda",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/cart.svg",
+      "bytes": 1622,
+      "sha256": "e9ecf4d36abff81358576f906aa03f1a43fbd913e5457ef506288259b7016c66",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/chair.svg",
+      "bytes": 1061,
+      "sha256": "1c8fd6131291a26210c46f440f72d36de8bc7c76f07063208a5f8f1d976d48c5",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/mattress.svg",
+      "bytes": 1822,
+      "sha256": "d24a21629d1d57481a0f1cfd4d86773e01ac2749397af64f0c82c264d223d56b",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/minus.svg",
+      "bytes": 545,
+      "sha256": "2d2ef08c6ae342266d6377bcab02a842fd6b2506cc811817787801ac56721c23",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/other.svg",
+      "bytes": 469,
+      "sha256": "c0ec5b2edfc15cf57c8243817ebcd194c5c2dc38d8831ac5fc7833f3cb5c01b5",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/plus.svg",
+      "bytes": 717,
+      "sha256": "948bcabd0602b9a1c044962fca56888477146d489deb2366ca5a2323d733356f",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/refresh.svg",
+      "bytes": 1429,
+      "sha256": "7b67630421796498f51f360eda39a983dd0830235a215a433677f4c48262a21c",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/sofa-figma.png",
+      "bytes": 669892,
+      "sha256": "fc50561b19f299f79aaa4e723749e5e3c610b9ea23924727c05c8f71daa8ebe5",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/sofa.svg",
+      "bytes": 1042,
+      "sha256": "87d78b3bb5c06acb7508726c6223717280bc1a6986136bb2f98ab90ee14258e8",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/icons/toggle-off.svg",
+      "bytes": 400,
+      "sha256": "f2f4654b132838aafaf68bf3017424756ccd44ab74fcfb221a32ae8284f10fe6",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/models/armchair-character.glb",
+      "bytes": 1523076,
+      "sha256": "7d43248bc0fd71d0b3ea1d40b939335dc3f6b65e1466412ef3f1c48b92f721b0",
+      "category": "3d-model"
+    },
+    {
+      "path": "public/models/chair-character.glb",
+      "bytes": 2700652,
+      "sha256": "a29579dbad081de4ad2efcb51df80a5c9a5bd228c7ee8cb402652c0d6c780b08",
+      "category": "3d-model"
+    },
+    {
+      "path": "public/models/mattress-character.glb",
+      "bytes": 144372,
+      "sha256": "bd320db181bc4021e5836c22a629cea697004a0f48580fa2afd0539ccc2f1d35",
+      "category": "3d-model"
+    },
+    {
+      "path": "public/models/sofa-character.glb",
+      "bytes": 2075060,
+      "sha256": "f95977ff55e79fd8b583dfd2e83dfdfe8248d311c5633dba3267ff3be5cfae6e",
+      "category": "3d-model"
+    },
+    {
+      "path": "public/models/sofa-sleepy.glb",
+      "bytes": 2053088,
+      "sha256": "58fdc3a0fd2b45659584538f72c72cdc9efbb5aa4838d383c001a2a4a4f526ae",
+      "category": "3d-model"
+    },
+    {
+      "path": "public/models/sofa-wink.glb",
+      "bytes": 2059976,
+      "sha256": "83b565b1aecd7349cb97ac588478ba746fce4e8821de1011331082c18707cd51",
+      "category": "3d-model"
+    },
+    {
+      "path": "public/offline.html",
+      "bytes": 769,
+      "sha256": "f4da7dbb800a190e3c7575de229505ff5eb88a62c261a622b07ca9f1da87d66c",
+      "category": "public-asset"
+    },
+    {
+      "path": "public/posters/armchair-clean-front.png",
+      "bytes": 712147,
+      "sha256": "c5340da6472885286fd61f2958149545e782ecc6c94dc1b57d15db9a8ceff3d0",
+      "category": "poster-image"
+    },
+    {
+      "path": "public/posters/armchair-clean-front.webp",
+      "bytes": 32510,
+      "sha256": "6cb223fe112035c2419d1f0f021d24c6d32bc70c98a9cf476fb1c83e35b8ec9e",
+      "category": "poster-image"
+    },
+    {
+      "path": "public/posters/chair-clean-front.png",
+      "bytes": 614533,
+      "sha256": "ad5526e9c247169fc0a2652ce7c35f718b98abac9f6a7c7aea22b76143f42c39",
+      "category": "poster-image"
+    },
+    {
+      "path": "public/posters/chair-clean-front.webp",
+      "bytes": 34248,
+      "sha256": "4bd64f73674a7267525e79bbd7eba10f944484173ae99111a66dbd69d8bf8b92",
+      "category": "poster-image"
+    },
+    {
+      "path": "public/posters/mattress-clean-front.png",
+      "bytes": 839479,
+      "sha256": "2c5369430184bf16152b52659a6aa7a3035121744355752e76fd22cb50a8282f",
+      "category": "poster-image"
+    },
+    {
+      "path": "public/posters/mattress-clean-front.webp",
+      "bytes": 69008,
+      "sha256": "d89c80699cd100e68a7510954bd66b2c9e5a53705c1c9a836e84404f0917b4ad",
+      "category": "poster-image"
+    },
+    {
+      "path": "public/posters/sofa-clean-front.png",
+      "bytes": 669892,
+      "sha256": "fc50561b19f299f79aaa4e723749e5e3c610b9ea23924727c05c8f71daa8ebe5",
+      "category": "poster-image"
+    },
+    {
+      "path": "public/posters/sofa-clean-front.webp",
+      "bytes": 32734,
+      "sha256": "fc951d3c9c187cb2c20b67bd38e8de9d54cfa48be21daf14e0003a44c5b956b2",
+      "category": "poster-image"
+    },
+    {
+      "path": "public/sw.js",
+      "bytes": 695,
+      "sha256": "07be0e8ca06fb4983789125f1692d482f7f3154a69b824be79aec7ff387ecf70",
+      "category": "public-asset"
+    },
+    {
+      "path": "scripts/assets.mjs",
+      "bytes": 1286,
+      "sha256": "067c86744242b9bceaf951252bd4f3cd6f5d5e4d7ddcf9c6da8b11c911516de5",
+      "category": "script"
+    },
+    {
+      "path": "scripts/encode-texture.cjs",
+      "bytes": 598,
+      "sha256": "d5afb54ff9fb7cb8dd1d3ac46d8982c6b6d5e586ec6cb3a488e174205cb1d17a",
+      "category": "script"
+    },
+    {
+      "path": "scripts/quality-models.mjs",
+      "bytes": 2974,
+      "sha256": "73f5664fb5a8fd44bb2b8281392f613f28cff6beca211d59dda7003c8c50510c",
+      "category": "script"
+    },
+    {
+      "path": "src/app/admin/page.tsx",
+      "bytes": 200,
+      "sha256": "447cc0317b58ac84294e2d3ef9ff99ad625f1da58f1079ec7f8d9d746dfed7ec",
+      "category": "source"
+    },
+    {
+      "path": "src/app/api/[...path]/route.ts",
+      "bytes": 7757,
+      "sha256": "c3f30c602b9784178762bc825a205f92872b8881ee6cb1537b78c421831798aa",
+      "category": "source"
+    },
+    {
+      "path": "src/app/contacts/page.tsx",
+      "bytes": 1945,
+      "sha256": "d3460fe390fa5bd5838aec36dc7958f8f0f9e27520ca089229c03ab1e1eadb69",
+      "category": "source"
+    },
+    {
+      "path": "src/app/credits/page.tsx",
+      "bytes": 1131,
+      "sha256": "87880b59cf6aac373a2752c9e25ce4146b1dbe17dc2f7ba9f8f518d5e425a906",
+      "category": "source"
+    },
+    {
+      "path": "src/app/globals.css",
+      "bytes": 40244,
+      "sha256": "7ed2c8232ad4e4094348b49b016ea14e2e60c2d54f175f6df61bac20905e20ff",
+      "category": "source"
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "bytes": 1568,
+      "sha256": "3b3cab6631c60ee21920b35a180dd6c19616de108624115a978b818cab4f9b20",
+      "category": "source"
+    },
+    {
+      "path": "src/app/manifest.ts",
+      "bytes": 506,
+      "sha256": "e505f4abc6230de7a76da0b36dbfd4bd6692d05abe6c0c56ae15ddc8ed6bfd3e",
+      "category": "source"
+    },
+    {
+      "path": "src/app/not-found.tsx",
+      "bytes": 357,
+      "sha256": "92db4ea7943fdf47632c1c68878a030dcd9f1d4ee4172d9a63302cef67eddacf",
+      "category": "source"
+    },
+    {
+      "path": "src/app/page.tsx",
+      "bytes": 617,
+      "sha256": "c37a432b8de481991eed0c0c8e1728488886c9eb6c6d66cd69349c6b6eef8e28",
+      "category": "source"
+    },
+    {
+      "path": "src/app/privacy/page.tsx",
+      "bytes": 2294,
+      "sha256": "64a9dc3b49ec76002a302cbc25e288b368b80b2b394ccf7e038c21e92fb5c2b9",
+      "category": "source"
+    },
+    {
+      "path": "src/app/request/[token]/page.tsx",
+      "bytes": 567,
+      "sha256": "bf463f9323dfcfddd4c19191a26220bf4304c31c297d7108673bee811d869c75",
+      "category": "source"
+    },
+    {
+      "path": "src/app/robots.ts",
+      "bytes": 291,
+      "sha256": "841dbe62c6343e68182b43ff9f00f4ab8a8ac28915a25985369deb0336c9f8e5",
+      "category": "source"
+    },
+    {
+      "path": "src/app/services/page.tsx",
+      "bytes": 4389,
+      "sha256": "909654b786fc29a04259aac55f4abf50d5a84611224d5ae1a08d4b177eb61051",
+      "category": "source"
+    },
+    {
+      "path": "src/app/sitemap.ts",
+      "bytes": 334,
+      "sha256": "53f4160ed4522cc8cc3cd836ad5cc67e437a1a9208d36b54dea31096f0b9ea5a",
+      "category": "source"
+    },
+    {
+      "path": "src/components/CleaningGame.tsx",
+      "bytes": 1754,
+      "sha256": "89cc980d825dd859b082fc65817a12c1baa72187e35c316c37b2c026eb442881",
+      "category": "source"
+    },
+    {
+      "path": "src/components/CompanyFooter.tsx",
+      "bytes": 1096,
+      "sha256": "0992e076070b5b576f0267fc51fd1c5014eb9e2943b4681364a878c6673c8187",
+      "category": "source"
+    },
+    {
+      "path": "src/components/CustomerApp.tsx",
+      "bytes": 21588,
+      "sha256": "bd1b8977950982bde52421b4a9c6c80885d86524861a612d96b6c53b4fb1ac41",
+      "category": "source"
+    },
+    {
+      "path": "src/components/LiquidControl.tsx",
+      "bytes": 468,
+      "sha256": "2136f2b2164d6281bb6b0f6bcdd3ae43db6f60d535e88d6bfc9db09eeb8e70e9",
+      "category": "source"
+    },
+    {
+      "path": "src/components/OwnerApp.tsx",
+      "bytes": 18472,
+      "sha256": "dbf7d71046be73bb57c22f616263b9290372752cbbe63b428270f67f9fd1d02d",
+      "category": "source"
+    },
+    {
+      "path": "src/components/Receipt.tsx",
+      "bytes": 4525,
+      "sha256": "10290e52648d619f3d022f308f71ac128370f6046f73fd1e974d76e643c64274",
+      "category": "source"
+    },
+    {
+      "path": "src/components/Scene.tsx",
+      "bytes": 15441,
+      "sha256": "2568735cd64eaaa8af24eb4971e4447257b1095f5e39f6897add28e93514d35d",
+      "category": "source"
+    },
+    {
+      "path": "src/components/Stage.tsx",
+      "bytes": 5911,
+      "sha256": "31d6e41b5c528b570b0b9d2eda54b215705a36dc40b0e48477b68ff8b9da4234",
+      "category": "source"
+    },
+    {
+      "path": "src/components/ui.tsx",
+      "bytes": 3268,
+      "sha256": "fa7c1ef4d1d8898f0389e75907c656a18b759bd3dc1f5ab2699ead4323436cdd",
+      "category": "source"
+    },
+    {
+      "path": "src/fonts/Onest.ttf",
+      "bytes": 193056,
+      "sha256": "966c5c29b4755da84b6854d5c21dd4eaa2420225d0e9874de602de176d4a9f31",
+      "category": "font"
+    },
+    {
+      "path": "src/fonts/SpaceGrotesk.ttf",
+      "bytes": 136676,
+      "sha256": "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+      "category": "font"
+    },
+    {
+      "path": "src/lib/client.ts",
+      "bytes": 1368,
+      "sha256": "0b20615bd38d38f7462fea4bff0d5579b5c449af72fb08989bc7dad3abbe2c42",
+      "category": "source"
+    },
+    {
+      "path": "src/lib/db.ts",
+      "bytes": 3789,
+      "sha256": "9edee2c3dcbd2b131c8e232edb2ae6206c9797fb07a47cbda329c31f57934a64",
+      "category": "source"
+    },
+    {
+      "path": "src/lib/domain.ts",
+      "bytes": 5917,
+      "sha256": "561216e3d4a819693467e9976102bb0561434f834d6efc0ce8174c44d9b667a6",
+      "category": "source"
+    },
+    {
+      "path": "src/lib/server.ts",
+      "bytes": 6330,
+      "sha256": "4baa448c31e016f642bddfb5627b0e916990dacd6c2c24964bfcfbec8d909c58",
+      "category": "source"
+    },
+    {
+      "path": "tests/domain.test.ts",
+      "bytes": 3231,
+      "sha256": "c720296741a539989931255bd4e13e4f36584091654e691a37f7ea011f7ed736",
+      "category": "test"
+    },
+    {
+      "path": "tests/integration.mjs",
+      "bytes": 6680,
+      "sha256": "d08d9ee2ffc00999cdb7e797dfe2f517c222e4c5883c6c3f6637db0627c78320",
+      "category": "test"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 703,
+      "sha256": "f70b288c3af6635001481b32d8f9d12df250fd446d0943b6ed31294cdafd9428",
+      "category": "config"
+    }
+  ]
+}

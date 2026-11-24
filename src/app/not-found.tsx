@@ -1,0 +1,1 @@
+export default function NotFound(){return <main className="narrow page"><a className="brand" href="/">мягко</a><h1>Эту страницу не нашли</h1><p>Проверьте ссылку на заявку или вернитесь к выбору мебели.</p><a className="button primary" href="/">К выбору мебели</a></main>;}
